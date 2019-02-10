@@ -1,0 +1,24 @@
+@page
+@model Page1Model
+
+@{
+//    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    Aantal kibbeling:
+    @Model.AmountOfKibbeling
+    Prijs per kibbeling:
+    @($"{Model.PricePerUnit:C}")
+    Totaalprijs:
+    @($"{Model.TotalPrice:C}")
+</div>
+</body>
+</html>

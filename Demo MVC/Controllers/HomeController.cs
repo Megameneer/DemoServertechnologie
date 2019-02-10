@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Demo_MVC.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Demo_MVC.Controllers
 {
@@ -24,6 +25,15 @@ namespace Demo_MVC.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [ValidateAntiForgeryToken]
+        public IActionResult Page1(int amountOfKibbeling)
+        {
+            HttpContext.Session.SetInt32("amountOfKibbeling", amountOfKibbeling);
+            var page1Model = new Page1Model {AmountOfKibbeling = amountOfKibbeling};
+            page1Model.TotalPrice = amountOfKibbeling * page1Model.PricePerUnit;
+            return View(page1Model);
         }
     }
 }
